@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: movie-service-pod
+  labels:
+    name: movie-service-pod
+    app: microservice-app
+spec:
+  containers:
+  - name: movie-service
+    image: movie-service
+    imagePullPolicy: Never
+    ports:
+      - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+  labels:
+    name: movie-service
+    app: microservice-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8001
+      targetPort: 8000
+
+  selector:
+    name: movie-service-pod
+    app: microservice-app

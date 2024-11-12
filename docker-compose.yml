@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  movie_service:
+    build: ./movie-service
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./movie-service/:/app/
+    ports:
+      - 8001:8000
+    environment:
+      - DATABASE_URL=postgresql://postgres:iamManusharma123@movies_db:5432
+      - CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/
+    
+  movies_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_movie:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=iamManusharma123   
+      - POSTGRES_DB=movies_db
+ 
+  cast_service:
+    build: ./cast-service
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./cast-service/:/app/
+    ports:
+      - 8002:8000
+    environment:
+      - DATABASE_URL=postgresql://postgres:iamManusharma123@cast_db:5432
+
+  cast_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_cast:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=iamManusharma123
+      - POSTGRES_DB=cast_db
+ 
+volumes:
+  postgres_data_movie:
+  postgres_data_cast:
+

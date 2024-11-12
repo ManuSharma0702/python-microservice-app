@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cast-db-pod
+  labels:
+    name: cast-db-pod
+    app: microservice-app
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      ports:
+        - containerPort: 5432
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "iamManusharma123"
+        - name: POSTGRES_DB
+          value: "cast_db"
+
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cast-db #the service name should be db as the worker and the result use name db to access postgres
+  labels:
+    name: cast-db
+    app: microservice-app
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    name: cast-db-pod
+    app: microservice-app
+    
