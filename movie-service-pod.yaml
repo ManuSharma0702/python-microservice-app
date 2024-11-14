@@ -11,7 +11,7 @@ spec:
     image: movie-service
     imagePullPolicy: Never
     ports:
-      - containerPort: 8000
+      - containerPort: 8001
 
 ---
 
@@ -26,8 +26,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 8001
-      targetPort: 8000
-
+      targetPort: 8001
   selector:
     name: movie-service-pod
     app: microservice-app

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-deployment
+  labels:
+    name: movie-deployment
+    app: microservice-app
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      name: movie-service-pod
+      app: microservice-app
+  template:
+    metadata:
+      name: movie-service-pod
+      labels:
+        name: movie-service-pod
+        app: microservice-app
+    spec:
+      containers:
+      - name: movie-service
+        image: movie-service
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8001
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-service
+  labels:
+    name: movie-service
+    app: microservice-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8001
+      targetPort: 8001
+  selector:
+    name: movie-service-pod
+    app: microservice-app
+

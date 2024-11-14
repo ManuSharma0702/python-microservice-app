@@ -4,7 +4,7 @@ import os
 from databases import Database
 
 DATABASE_URL = 'postgresql://postgres:iamManusharma123@movie-db/movies_db'
-# DATABASE_URL = os.getenv('DATABASE_URL')
+#DATABASE_URL = os.getenv('DATABASE_URL')
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 metadata = MetaData()
 

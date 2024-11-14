@@ -4,27 +4,31 @@ metadata:
   name: movie-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-  
+    nginx.ingress.kubernetes.io/service-upstream: "true"  
 spec:
+  ingressClassName: "nginx"
   rules:
-  - host: movie.example.com
+  - host: movie.example 
     http:
       paths:
-      - path: /api/v1/movies
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: movie-service
             port:
-              number: 8001
-  - host: cast.example.com
+              number: 8001 
+  - host: cast.example 
     http:
       paths:
-      - path: /api/v1/cast
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: cast-service
             port:
-              number: 8002
+              number: 8002 
+
+
+
+

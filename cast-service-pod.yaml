@@ -11,7 +11,7 @@ spec:
     image: cast-service
     imagePullPolicy: Never
     ports:
-      - containerPort: 8000
+      - containerPort: 8002
 
 ---
 
@@ -23,11 +23,10 @@ metadata:
     name: cast-service
     app: microservice-app
 spec:
-  type: ClusterIP
+  type: ClusterIP 
   ports:
     - port: 8002
-      targetPort: 8000
-  
+      targetPort: 8002
   selector:
     name: cast-service-pod
     app: microservice-app
