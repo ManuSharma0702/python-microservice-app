@@ -18,7 +18,13 @@ spec:
           value: "iamManusharma123"
         - name: POSTGRES_DB
           value: "movies_db"
-
+      volumeMounts:
+            - name: movie-db-storage
+              mountPath: /var/lib/postgresql/data
+  volumes:
+    - name: movie-db-storage
+      persistentVolumeClaim:
+        claimName: movie-db-pvc
 --- 
 
 apiVersion: v1

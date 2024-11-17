@@ -19,7 +19,13 @@ spec:
         - name: POSTGRES_DB
           value: "cast_db"
 
-
+      volumeMounts:
+      - name: cast-db-storage
+        mountPath: /var/lib/postgresql/data
+  volumes:
+  - name: cast-db-storage
+    persistentVolumeClaim:
+      claimName: cast-db-pvc
 --- 
 
 apiVersion: v1
