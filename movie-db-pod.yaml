@@ -5,7 +5,7 @@ metadata:
   labels:
     name: movie-db-pod
     app: microservice-app
-spec:
+specs:
   containers:
     - name: postgres
       image: postgres
