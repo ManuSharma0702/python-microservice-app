@@ -4,4 +4,5 @@ databases[postgresql]
 SQLAlchemy
 uvicorn
 httpx
+redis
 psycopg2-binary

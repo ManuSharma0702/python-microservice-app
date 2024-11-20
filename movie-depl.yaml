@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: movie-service
-        image: movie-service
+        image: movie-service-v2
         imagePullPolicy: Never
         ports:
           - containerPort: 8001
